@@ -1,8 +1,10 @@
 # Gem-puzzle
 ## browser game on JS
 ***
-![gem-puzzels ui](src/assets/images/gem-puzzle.png);
+![gem-puzzels ui](src/assets/images/gem-puzzle.png)
 ***
+[Let's play](https://gem-puzzle-kseniamv.netlify.app/)
+
 ### Rules:
 * 1  Move the chips one at a time to stack them in the correct order from 1 to 15. Start counting from the top left corner. 
 ***
@@ -17,7 +19,7 @@
 * 8  add ability to on and off sound;
 * 9  adaptive design;
 
-[Let's play](https://gem-puzzle-kseniamv.netlify.app/);
+
 
 
 
