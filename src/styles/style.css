@@ -1,0 +1,558 @@
+@import './fonts.css';
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Itim, sans-serif;
+    font-size: 90px;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    background-image: url('./assets/images/grey.png');
+    background-size: cover;
+    user-select: none;
+}
+.puzzle-title{
+    width: 600px;
+    height: 80px;
+    text-align: center;
+    font-size: 90%;
+    position: absolute;
+    top: calc(50% - 40px);
+    left: -250px;
+    transform: rotate(-90deg);
+    color: rgb(255,255,255);
+    text-shadow: 0 0 10px rgba(0,0,0,.5);
+    z-index: 0;
+}
+
+.main-conteiner{
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.puzzle-conteiner{
+    width: auto;
+    height: auto;
+    margin: 15px auto;
+    position: relative;
+    display: grid;
+    grid-gap: 0;
+    justify-items: center;
+    background-color: rgb(255,255,255);
+    box-shadow: 0 0  20px 5px rgba(0,0,0,.5);
+    z-index: 1;
+    border: 8px ridge rgba(0,0,0,.5);
+}
+
+.default-field{  /*4x4*/
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+}
+
+.small-field{          /*3x3*/
+    grid-template-columns: repeat(3, 100px);    
+    grid-template-rows: repeat(3, 100px);
+}
+
+.middle-field{     /*5x5*/  
+    grid-template-columns: repeat(5, 90px);    
+    grid-template-rows: repeat(5, 90px);
+}
+
+.middle-field-six{   /*6x6*/
+    grid-template-columns: repeat(6, 90px);    
+    grid-template-rows: repeat(6, 90px);
+}
+
+.big-field{   /*7x7*/
+    grid-template-columns: repeat(7, 80px);    
+    grid-template-rows: repeat(7,  80px);
+}
+
+.big-field-eight{  /*8x8*/
+    grid-template-columns: repeat(8, 70px);    
+    grid-template-rows: repeat(8, 70px);
+}
+
+.puzzle-hidden{
+    display: none;
+}
+
+/*************buttons*****************/
+.game-button,
+.setting-button,
+.popup-button{
+    width: 140px;
+    height: 40px;
+    margin: 10px auto;
+    font-size: 30%;
+    text-transform: uppercase;
+    color:rgba(0,0,0,.5);
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(252, 252, 252);
+    box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+
+}
+
+.popup-button{
+    font-size: 20%;
+}
+
+.sound-button{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    border-radius: 5px;
+    border: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 10;
+}
+
+.button--hidden{
+    display: none;
+}
+.button--show{
+    display: block;
+}
+
+.empty{
+    width: 90%;
+    height: 90%;
+    min-width: 50px;
+    min-height: 50px;
+    box-shadow: none;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.game-button:hover{
+    box-shadow: 0 5px 10px 2px rgba(0,0,0,.2);
+}
+/********************puzzle item************/
+.puzzle-item{
+    width: 90%;
+    height: 90%;
+    min-width: 35px;
+    min-height: 35px;
+    margin: auto;
+    position: relative;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px 5px rgba(18, 41, 77, 0.2);
+    font-size: 50%;
+    color:rgba(0,0,0,.6);
+    cursor: pointer;
+    z-index: 2;
+
+}
+
+.puzzle-item:hover{
+    border: 2px solid rgba(0,0,0,.5);
+}
+
+
+/************setting conteiner************/
+.setting-conteiner{
+    width: 30%;
+    min-width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 5px 5px 5px rgba(0,0,0,.2);
+    z-index: 20;
+}
+
+.setting-hidden{
+    display: none;
+}
+
+.setting-list{
+    width: 90%;
+    height: 30px;
+    margin: 10px;
+    font-size: 25%;
+    font-weight: bold;
+    text-align: left;
+    color: rgba(0,0,0,.6);
+    filter: drop-shadow(2px 2px rgba(0,0,0,.2));
+    border: none;
+    box-shadow: 0 2px 2px 2px rgba(0,0,0,.2);
+    cursor: pointer;
+}
+
+.setting-label{
+    width: 90%;
+    height: auto;
+    margin: 10px;
+    font-size: 25%;
+    font-weight: bold;
+    text-align: left;
+    color: rgb(255,255,255);
+    filter: drop-shadow(2px 2px rgba(0,0,0,.2));
+}
+
+.setting-options{
+    width: auto;
+    height: 30px;
+    margin: 10px;
+    font-size: 80%;
+    font-weight: bold;
+    color: rgba(0,0,0,.6);
+    filter: drop-shadow(2px 2px rgba(0,0,0,.2)); 
+}
+
+/******************time and step-count******************/
+
+.time{
+    min-width: 120px;
+    max-width: 150px;
+    height: 30px;
+    text-align: center;
+    position: absolute;
+    top: -50px;
+    right: 0;
+    font-size: 20%;
+    color: rgba(203, 202, 202, 0.6);
+}
+
+.time-position{
+    top: 10px;
+    right: -160px;
+}
+
+.step-count{
+    min-width: 120px;
+    max-width: 150px;
+    height: 30px;
+    text-align: left;
+    position: absolute;
+    top: -50px;
+    left: 0;
+    font-size: 20%;
+    color: rgba(203, 202, 202, 0.6);
+}
+
+.step-count--position{
+    top: 100px;
+    left: 105%;
+}
+
+.time span{
+    width: auto;
+    height: 100%;
+    font-size: 100%;
+    color: inherit;
+    text-align: center;
+}
+
+
+/**************popup************/
+.popup{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.2);
+    z-index: 20;
+}
+
+.popup p {
+    width: 500px;
+    min-width: 320px;
+    height: 200px; 
+    margin: 50px auto; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px; 
+    text-align: center;
+    background-color: rgb(252, 252, 252);
+    box-shadow: 0 0  20px 5px rgba(0,0,0,.5);
+    color:rgba(0,0,0,.5);
+    font-size: 40%;
+}
+
+.win-conteiner{
+    width: 80%;
+    height: 40%;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.win-notice{
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.win-notice span{
+    display: inline-block;
+    font-size: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(252, 252, 252);
+    font-weight: bold;
+    letter-spacing: 2px;
+    filter: drop-shadow(0,0,5px rgba(0,0,0,.5));
+    position: relative;
+    transform: translateY(-130%);
+    transition: transform 2s;
+    opacity: 0;
+}
+
+.win-count{
+    width: 100%;
+    height: 50%;
+    margin: auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.win-count span{
+    width: 100%;
+    display: inline-block;
+    font-size: 60%;
+    text-align: center;
+    color: rgb(252, 252, 252);
+    font-weight: bold;
+    filter: drop-shadow(0,0,5px rgba(0,0,0,.5));
+    position: relative;
+    transform: translateY(-130%);
+    transition: transform 2s;
+    opacity: 0;
+}
+
+.closeButton{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 15px;
+    right: 55px;
+    font-size: 30%;
+    color: rgb(252, 252, 252);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+/**************drag and drop*************/
+
+.hide-item{
+    opacity: 0;
+    box-shadow: none;
+}
+
+.drag-hover{
+    background-color: rgba(0,0,0,.1);
+}
+
+.animateLetters{
+    animation: animateLetters 0.3s ease-in forwards, letterUp 1s 0.3s ease-out; 
+}
+
+@keyframes animateLetters{
+    0%{
+        transform: translateY(-130%);
+        opacity: 0;
+        
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1; 
+    }
+}
+
+@keyframes letterUp{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 700px){
+    .puzzle-title{
+        width: 90%;
+        height: 40px;
+        font-size: 40%;
+        top: 10px;
+        left: 5%;
+        transform: none;
+    }
+    .main-conteiner{
+        width: 100%;
+        margin: 0;
+    }
+
+    .puzzle-item{
+        box-shadow: 0 2px 2px 2px rgba(18, 41, 77, 0.2);
+        font-size: 25%;
+    }
+
+    .empty{
+        min-width: 35px;
+        min-height: 35px;
+    }
+
+    .time{
+        height: 30px;
+        top: -100px;
+        right: calc(50% - 60px);
+    }
+
+    .step-count{
+        height: 30px;
+        top: -50px;
+        left: calc(50% - 60px);
+    }
+    
+    .default-field{  /*4x4*/
+        grid-template-columns: repeat(4, 60px);
+        grid-template-rows: repeat(4, 60px);
+    }
+
+    .small-field{          /*3x3*/
+        grid-template-columns: repeat(3, 80px);    
+        grid-template-rows: repeat(3, 80px);
+    }
+
+    .middle-field{     /*5x5*/  
+        grid-template-columns: repeat(5, 60px);    
+        grid-template-rows: repeat(5, 60px);
+    }
+
+    .middle-field-six{   /*6x6*/
+        grid-template-columns: repeat(6, 50px);    
+        grid-template-rows: repeat(6, 50px);
+    }
+
+    .big-field{   /*7x7*/
+        grid-template-columns: repeat(7, 45px);    
+        grid-template-rows: repeat(7,  45px);
+    }
+
+    .big-field-eight{  /*8x8*/
+        grid-template-columns: repeat(8, 45px);    
+        grid-template-rows: repeat(8, 45px);
+    }
+    
+}
+
+@media screen and (max-width: 450px){
+    .win-conteiner{
+        width: 100%;
+        left: 0;
+        z-index: 30;
+    }
+    .win-count span{
+        font-size: 35%;
+    }
+
+    .win-notice span{
+        font-size: 60%;
+    }
+    .sound-button{
+        top: 15px;
+        right: 15px;
+    }
+    .popup p {
+        width: 320px;
+    }
+
+}
+
+@media screen and (max-width: 330px){
+    .puzzle-title{
+        top: 90%;
+    }
+
+    .puzzle-item{
+        font-size: 18%;
+    }
+    
+
+    .time{
+        top: -50px;
+    }
+
+    .step-count{
+        top: -25px;
+    }
+    
+    .middle-field{     /*5x5*/  
+        grid-template-columns: repeat(5, 50px);    
+        grid-template-rows: repeat(5, 50px);
+    }
+
+    .middle-field-six{   /*6x6*/
+        grid-template-columns: repeat(6, 45px);    
+        grid-template-rows: repeat(6, 45px);
+    }
+
+    .big-field-eight{  /*8x8*/
+        grid-template-columns: repeat(8, 38px);    
+        grid-template-rows: repeat(8, 38px);
+    }
+
+    .puzzle-conteiner{
+        border: none;
+    }
+
+    .game-button,
+    .setting-button{
+        width: 120px;
+        height: 30px;
+        margin: 5px auto;
+        font-size: 20%;
+    }
+
+
+
+}
